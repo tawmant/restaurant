@@ -1,5 +1,5 @@
 import React from 'react';
-import './cart-table.scss';
+import './_cart-table.scss';
 
 const CartTable = () => {
     return (
