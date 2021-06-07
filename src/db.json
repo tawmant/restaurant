@@ -34,6 +34,13 @@
 			"url": "https://i.cbc.ca/1.4491288.1516208229!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/cowboysteak.jpg",
 			"category": "meat",
 			"id": 5
+		},
+		{
+			"title": "Caesar salad",
+			"price": 10,
+			"url": "https://www.gastronom.ru/binfiles/images/20191113/b50e9f2a.jpg",
+			"category": "salads",
+			"id": 6
 		}
 	]
 }

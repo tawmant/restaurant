@@ -13,6 +13,6 @@ export default class RestoService {
     }
 
     async getMenuItems() {
-        return await this.getResource(`/menu/`)
+        return await this.getResource('/menu/');
     }
 }

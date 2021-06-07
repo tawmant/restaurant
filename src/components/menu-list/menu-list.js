@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import MenuListItem from '../menu-list-item';
 import {connect} from 'react-redux';
 import WithRestoService from '../hoc';
-import {menuLoaded, menuRequested} from '../../actions';
+import {menuLoaded, menuRequested, menuError} from '../../actions';
 import Spinner from '../spinner';
+import Error from '../error';
 
 import './_menu-list.scss';
 
@@ -14,25 +15,29 @@ class MenuList extends Component {
 
         const {RestoService} = this.props;
         RestoService.getMenuItems()
-            .then(res => this.props.menuLoaded(res));
+            .then(res => this.props.menuLoaded(res))
+            // eslint-disable-next-line no-unused-vars
+            .catch(error => this.props.menuError());
     }
 
     render() {
 
-        const {menuItems, loading} = this.props;
+        const {menuItems, loading, error} = this.props;
 
         if (loading) {
             return <Spinner/>;
         }
 
+        if (error) {
+            return <Error/>;
+        }
+
+        const items = menuItems.map(menuItem => {
+            return <MenuListItem key={menuItem.id} menuItem={menuItem}/>;
+        });
+
         return (
-            <ul className="menu__list">
-                {
-                    menuItems.map(menuItem => {
-                        return <MenuListItem key={menuItem.id} menuItem={menuItem}/>;
-                    })
-                }
-            </ul>
+            <View items={items}/>
         );
     }
 }
@@ -40,13 +45,24 @@ class MenuList extends Component {
 const mapStateToProps = (state) => {
     return {
         menuItems: state.menu,
-        loading: state.loading
+        loading: state.loading,
+        error: state.error
     };
 };
 
 const mapDispatchToProps = {
     menuLoaded,
-    menuRequested
+    menuRequested,
+    menuError
 };
+
+const View = ({items}) => {
+    return (
+        <ul className="menu__list">
+            {items}
+        </ul>
+    );
+};
+
 
 export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(MenuList));
