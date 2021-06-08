@@ -1,7 +1,7 @@
 {
 	"menu": [
 		{
-			"title": "Cesar salad",
+			"title": "Caesar salad",
 			"price": 12,
 			"url": "https://static.1000.menu/img/content/21458/-salat-cezar-s-kr-salat-cezar-s-krevetkami-s-maionezom_1501173720_1_max.jpg",
 			"category": "salads",
@@ -36,7 +36,7 @@
 			"id": 5
 		},
 		{
-			"title": "Caesar salad",
+			"title": "Caesar salad with chicken",
 			"price": 10,
 			"url": "https://www.gastronom.ru/binfiles/images/20191113/b50e9f2a.jpg",
 			"category": "salads",
