@@ -16,12 +16,13 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
+        "react/react-in-jsx-scope": "off",
         "no-var": "error",
         "semi": [2, "always"],
-        "quotes": ["error", "single"],
-        "react/prop-types": "off"
+        "quotes": ["error", "single"]
     }
 }
