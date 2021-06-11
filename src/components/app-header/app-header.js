@@ -2,8 +2,11 @@ import React from 'react';
 import cartIcon from './shopping-cart-solid.svg';
 import './_app-header.scss';
 import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
-const AppHeader = ({total}) => {
+const AppHeader = () => {
+    const total = useSelector(state => state.totalPrice);
+
     return (
         <header className="header">
             <Link to='/' className="header__link">Menu</Link>

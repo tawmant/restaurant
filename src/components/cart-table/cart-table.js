@@ -1,11 +1,17 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteFromCart} from '../../actions';
+import WithRestoService from '../hoc';
+
 import './_cart-table.scss';
 
-const CartTable = () => {
+const CartTable = ({RestoService}) => {
     const dispatch = useDispatch();
     const items = useSelector(state => state.items);
+
+    if( items.length === 0){
+        return <div className="cart__title"> Ваша корзина пуста :( </div>;
+    }
 
     return (
         <>
@@ -16,7 +22,7 @@ const CartTable = () => {
                         const {title, url, price, id} = item;
                         return (
                             <div key={id} className='cart__item'>
-                        <img src={url} className='cart__item-img' alt={title}></img>
+                            <img src={url} className='cart__item-img' alt={title}></img>
                                 <div className='cart__item-title'>{title}</div>
                                 <div className='cart__item-price'>{price}$</div>
                                 <div onClick={() => dispatch(deleteFromCart(id))} className='cart__close'>&times;</div>
@@ -25,8 +31,19 @@ const CartTable = () => {
                     })
                 }
             </div>
+            <button onClick={() => RestoService.setOrder(generateOrder(items)) } className='order'>Оформить заказ</button>
         </>
     );
 };
 
-export default CartTable;
+const generateOrder = (items) => {
+    const newOrder = items.map(item => {
+        return {
+            id: item.id,
+            qtty: item.qtty
+        }
+    })
+    return newOrder;
+}
+
+export default WithRestoService()(CartTable);
