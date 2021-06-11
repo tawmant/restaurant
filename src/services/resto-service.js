@@ -16,17 +16,6 @@ export default class RestoService {
         return await this.getResource('/menu/');
     }
 
-    async getItem(id) {
-        const res = await this.getResource('/menu/');
-        console.log(res);
-        const item = res.find( (el) => {
-            console.log(`el.id: ${el.id}, id: ${id}`);
-            return el.id === +id;
-        });
-        console.log(item);
-        return item;
-    }
-
     async setOrder(order) {
         const number = await this.getOrderNumber();
         const newOrder = {
@@ -40,6 +29,7 @@ export default class RestoService {
             },
             body: JSON.stringify(newOrder)
         });
+
         if (!response.ok){
             throw new Error('json error'); 
         }

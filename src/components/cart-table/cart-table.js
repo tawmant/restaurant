@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteFromCart} from '../../actions';
+import {deleteFromCart, dataСlean} from '../../actions';
 import WithRestoService from '../hoc';
 
 import './_cart-table.scss';
@@ -9,8 +9,16 @@ const CartTable = ({RestoService}) => {
     const dispatch = useDispatch();
     const items = useSelector(state => state.items);
 
-    if( items.length === 0){
-        return <div className="cart__title"> Ваша корзина пуста :( </div>;
+    const [title, setTitle] = useState('true');
+
+    if(items.length === 0){
+        return <div className="cart__title">{title ? 'Ваша корзина пуста :(' : 'Спасибо за заказ!'}</div>;
+    }
+
+    const send = (items) => {
+        RestoService.setOrder(generateOrder(items));
+        dispatch(dataСlean());
+        setTitle(!title);
     }
 
     return (
@@ -19,19 +27,20 @@ const CartTable = ({RestoService}) => {
             <div className='cart__list'>
                 {
                     items.map(item => {
-                        const {title, url, price, id} = item;
+                        const {title, url, price, qtty, id} = item;
                         return (
                             <div key={id} className='cart__item'>
-                            <img src={url} className='cart__item-img' alt={title}></img>
+                                <div className='num-orders'>{qtty}</div>
+                                <img src={url} className='cart__item-img' alt={title}></img>
                                 <div className='cart__item-title'>{title}</div>
-                                <div className='cart__item-price'>{price}$</div>
+                                <div className='cart__item-price'>{price * qtty}$</div>
                                 <div onClick={() => dispatch(deleteFromCart(id))} className='cart__close'>&times;</div>
                             </div>
                         );
                     })
                 }
             </div>
-            <button onClick={() => RestoService.setOrder(generateOrder(items)) } className='order'>Оформить заказ</button>
+            <button onClick={() => send(items)} className='order'>Оформить заказ</button>
         </>
     );
 };

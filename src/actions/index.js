@@ -31,10 +31,13 @@ const deleteFromCart = (id) => {
     };
 };
 
+const dataСlean = () => ({type: 'DATA_CLEAN'})
+
 export {
     menuLoaded,
     menuRequested,
     menuError,
     addedToCart,
-    deleteFromCart
+    deleteFromCart,
+    dataСlean
 };

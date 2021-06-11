@@ -28,12 +28,13 @@ const reducer = (state = initialState, action) => {
             const id = action.payload;
             
             const itemInd = state.items.findIndex(item => item.id === id);
-            if (itemInd >= 0){
+            if (itemInd >= 0) {
                 const itemInState = state.items.find(item => item.id === id);
                 const newItem = {
                     ...itemInState,
                     qtty: ++itemInState.qtty
                 }
+                
                 return {
                     ...state, 
                     items: [
@@ -75,6 +76,12 @@ const reducer = (state = initialState, action) => {
                 ],
                 totalPrice: state.totalPrice - price,
             };
+        case 'DATA_CLEAN':
+            return {
+                ...state,
+                items: [],
+                totalPrice: 0
+            }
         default:
             return state;
     }

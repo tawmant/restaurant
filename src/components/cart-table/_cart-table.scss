@@ -46,7 +46,7 @@
         border: 1px solid #fff;
         cursor: pointer;
     }
-    .order{
+    .order {
         display: block;
         margin: 30px auto 0px auto;
         width: 170px;
@@ -57,4 +57,15 @@
         font-weight: bold;
         font-size: 14px;
     }
+    .num-orders {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        border-radius: 50%;
+        background: green;
+        top: -9px;
+        width: 23px;
+        left: -9px;
+    }
 }
+
