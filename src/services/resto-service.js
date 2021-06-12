@@ -1,6 +1,6 @@
 export default class RestoService {
 
-    _apiBase = 'http://localhost:3005';
+    _apiBase = 'http://localhost:8000';
 
     async getResource(url) {
         const res = await fetch(`${this._apiBase}${url}`);
