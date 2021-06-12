@@ -1,6 +1,6 @@
 export default class RestoService {
 
-    _apiBase = 'http://localhost:8000';
+    _apiBase = 'https://my-json-server.typicode.com/tawmant/restaurant';
 
     async getResource(url) {
         const res = await fetch(`${this._apiBase}${url}`);
